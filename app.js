@@ -1,5 +1,6 @@
 let playerPoints = 0;
 let computerPoints = 0;
+const buttons = Array.from(document.querySelectorAll(".btn"));
 
 const content = document.querySelector('#content');
 
@@ -60,17 +61,17 @@ function getWinner() {
   resultBoard.appendChild(restartButton);
 
   content.appendChild(resultBoard);
-    
+
   restartButton.addEventListener('click', () => { 
     playerPoints =  computerPoints = 0;
     content.removeChild(resultBoard);
+    const roundResult = document.querySelector('.roundResult');
+    if (roundResult) roundResult.textContent = '';
     updateScore();
   })
 } 
 
 function game() {
-  const buttons = Array.from(document.querySelectorAll(".btn"));
-
   const roundResult = document.createElement('div');
   roundResult.classList.add('roundResult');
   content.appendChild(roundResult);
@@ -78,12 +79,11 @@ function game() {
   buttons.forEach(button => {
     button.addEventListener("click", (e) => {
       roundResult.textContent = playRound(e);
-      console.log("Pontos do jogador:" + playerPoints);
-      console.log("Pontos do computer:" + computerPoints);
-      getWinner();
       updateScore();
+      getWinner();
     });
   });
+
 }
 
 game();
