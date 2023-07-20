@@ -1,6 +1,7 @@
 let playerPoints = 0;
 let computerPoints = 0;
 const buttons = Array.from(document.querySelectorAll(".btn"));
+let winner = false;
 
 const content = document.querySelector('#content');
 
@@ -45,8 +46,10 @@ function getWinner() {
   if (playerPoints >= numOfWins) {
     gameResult.style.color = "#045b04";
     gameResult.textContent = "Congratulations! you won the game. ";
+    winner = true;
   } else if (computerPoints >= numOfWins) {
     gameResult.style.color = "#bb0606";
+    winner = true;
     gameResult.textContent =  "Oh no, computer won the game... I guess the world domination it's coming";
   } else return;
 
@@ -67,6 +70,7 @@ function getWinner() {
     content.removeChild(resultBoard);
     const roundResult = document.querySelector('.roundResult');
     if (roundResult) roundResult.textContent = '';
+    winner = false;
     updateScore();
   })
 } 
@@ -77,13 +81,16 @@ function game() {
   content.appendChild(roundResult);
 
   buttons.forEach(button => {
-    button.addEventListener("click", (e) => {
+    button.addEventListener("click", e => {
+    if (!winner) {
+      const roundResult = document.querySelector('.roundResult');
       roundResult.textContent = playRound(e);
       updateScore();
-      getWinner();
-    });
-  });
-
+      getWinner(); 
+    }
+    })
+  })
 }
 
 game();
+
