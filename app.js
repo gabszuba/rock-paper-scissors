@@ -63,7 +63,7 @@ function getWinner() {
   restartButton.id = 'restart-button';
   resultBoard.appendChild(restartButton);
 
-  content.appendChild(resultBoard);
+  content.insertBefore(resultBoard, score);
 
   restartButton.addEventListener('click', () => { 
     playerPoints =  computerPoints = 0;
