@@ -104,8 +104,17 @@ img{
   background: rgba(255, 255, 255, 0.5);
   padding: 1.5rem;
   height: fit-content;
-  width: 650px;
+  width: min(650px, 50%);
   border: 3px solid rgb(12, 12, 12);
   border-radius: 10px;
   margin: 30px;
+}
+
+.buttons {
+  justify-content: center;
+  align-content: center;
+  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 25px;
 }
